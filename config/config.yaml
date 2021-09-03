@@ -1,0 +1,75 @@
+run:
+  raw_local: data/external/sports_ref.csv
+
+api_getdata:
+  acquire_data:
+    year: 2021
+    season: '2020-21'
+    season_col: season
+    name_col: name
+
+clean_featurize:
+  clean_data:
+    year_col: year
+    max_years: 4
+    year_mapping:
+      1: Freshman
+      2: Sophomore
+      3: Junior
+    min_minutes: 100
+    team_col: team
+    na_fill_val: 0
+    drop_columns: [season,box_plus_minus,defensive_box_plus_minus,offensive_box_plus_minus,defensive_rebound_percentage,
+              defensive_rebounds,field_goal_attempts,field_goals,free_throw_attempt_rate,free_throw_attempts,free_throws,
+              offensive_rebound_percentage,offensive_rebounds,personal_fouls,points_produced,team_abbreviation,three_point_attempts,
+              three_pointers,true_shooting_percentage,two_point_attempts,two_pointers,win_shares,win_shares_per_40_minutes,
+              defensive_win_shares,effective_field_goal_percentage]
+  featurize:
+    ppm_col: ppm
+    apm_col: apm
+    rpm_col: rpm
+    bpm_col: bpm
+    spm_col: spm
+    tpm_col: tpm
+
+model_pipeline:
+  kmeans_all:
+    cluster_cols: [ppm,apm,rpm,bpm,spm,usage_percentage,height,three_point_attempt_rate,three_point_percentage,two_point_percentage]
+    init_type: k-means++
+    n_init: 10
+    max_iter: 300
+    random_state: 3295
+  optimal_clusternum:
+    min_clust: 2
+    max_clust: 11
+    SSEpath: models/clustering_SSE.png
+    silpath: models/clustering_silhouette.png
+  test_cluster_stability:
+    n_clusters: 5
+    random_state_comp: 4986
+    cluster_map:
+      0: 3
+      1: 4
+      2: 2
+      3: 0
+      4: 1
+    cluster_col1: cluster
+    cluster_col2: cluster2
+    round_digits: 2
+    savepath: models/cluster_fits_percent_difference.csv
+  final_cluster_fit:
+    n_clusters: 5
+    label_col: cluster
+    label_col2: cluster2
+    label_map:
+      0: Volume Shooter and Scorer
+      1: Three-Point Specialist
+      2: O and D Ball-Handler
+      3: Paint Presence
+      4: Shooting Big
+    player_type_col: player_type
+    scatterx_col: ppm
+    scattery_col: three_point_attempt_rate
+    palette: deep
+    clust_title: Points per Minute vs. 3 Point Attempt Rate Colored by Player Type
+    clust_plot: models/clusters_visualized.png

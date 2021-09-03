@@ -1,0 +1,8 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,600);
+
+body {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'United Italic Semi Condensed Black', sans-serif;
+  background-color:#d0f6fb;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="static/basic.css" rel="stylesheet">
+</head>
+
+<body>
+    <h3>
+        "{{player_filter}}" player types are shown and sorted by {{sort_col}}:
+    </h3>
+    <h4>
+         <a href = "{{ url_for('index', player_filter='player_type', sort_col='column') }}">Enter a new search</a>
+    </h4>
+
+    <table border="1", bordercolor="#6d62b6">
+         <thead>
+           <tr>
+              <th>Player</th>
+              <th>Player Type</th>
+              <th>Pos</th>
+              <th>Year</th>
+              <th>Team</th>
+              <th>Height</th>
+              <th>Weight</th>
+              <th>Games Played</th>
+              <th>Games Started</th>
+              <th>FG %</th>
+              <th>3Pt %</th>
+              <th>Pts</th>
+              <th>Reb</th>
+              <th>Ast</th>
+              <th>Blk</th>
+              <th>Stl</th>
+              <th>TO</th>
+              <th>Pts Per Min</th>
+              <th>Reb Per Min</th>
+              <th>Ast Per Min</th>
+              <th>Blk Per Min</th>
+              <th>Stl Per Min</th>
+              <th>TO Per Min</th>
+           </tr>
+         </thead>
+
+         <tbody>
+            {% for player in stats %}
+               <tr>
+                   <td>{{ player.player_name }}</td>
+                   <td>{{ player.player_type }}</td>
+                   <td>{{ player.position }}</td>
+                   <td>{{ player.year }}</td>
+                   <td>{{ player.team }}</td>
+                   <td>{{ player.height }}</td>
+                   <td>{{ player.weight }}</td>
+                   <td>{{ player.games }}</td>
+                   <td>{{ player.games_started }}</td>
+                   <td>{{ player.fg_pct }}</td>
+                   <td>{{ player.fg_pct3 }}</td>
+                   <td>{{ player.points }}</td>
+                   <td>{{ player.rebounds }}</td>
+                   <td>{{ player.assists }}</td>
+                   <td>{{ player.blocks }}</td>
+                   <td>{{ player.steals }}</td>
+                   <td>{{ player.turnovers }}</td>
+                   <td>{{ player.ppm }}</td>
+                   <td>{{ player.rpm }}</td>
+                   <td>{{ player.apm }}</td>
+                   <td>{{ player.bpm }}</td>
+                   <td>{{ player.spm }}</td>
+                   <td>{{ player.tpm }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+</body>
+</html>

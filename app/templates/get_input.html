@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="static/basic.css" rel="stylesheet">
+</head>
+
+<body>
+    <h2>
+         <a href = "{{ url_for('index', player_filter='player_type', sort_col='column') }}">NCAA Basketball Player Transfer Finder</a>
+    </h2>
+
+    <hr/>
+    <table>
+      <thead>
+        <tr>
+           <th>Enter a player type to filter by and a statistic column to sort by:</th>
+        </tr>
+      </thead>
+      </table>
+      <form action="{{ url_for('get_input') }}" method=post class=get-input>
+      <dl>
+        <label for="player_type">Player Type:</label>
+        <select name="player_type" id="player_type" placeholder="Player Type">
+          <option value="Volume Shooter and Scorer">Volume Shooter and Scorer</option>
+          <option value="O and D Ball-Handler">O and D Ball-Handler</option>
+          <option value="Three-Point Specialist">Three-Point Specialist</option>
+          <option value="Shooting Big">Shooting Big</option>
+          <option value="Paint Presence">Paint Presence</option>
+        </select>
+
+        <label for="sort_col">Column to Sort By:</label>
+        <select name="sort_col" id="sort_col" placeholder="Sort Column">
+          <option value="points">Points</option>
+          <option value="ppm">Points Per Minute</option>
+          <option value="rebounds">Rebounds</option>
+          <option value="rpm">Rebounds Per Minute</option>
+          <option value="assists">Assists</option>
+          <option value="apm">Assists Per Minute</option>
+          <option value="blocks">Blocks</option>
+          <option value="bpm">Blocks Per Minute</option>
+          <option value="steals">Steals</option>
+          <option value="spm">Steals Per Minute</option>
+          <option value="turnovers">Turnovers</option>
+          <option value="tpm">Turnovers Per Minute</option>
+          <option value="fg_pct">FG Percentage</option>
+          <option value="fg_pct3">Three Point FG Percentage</option>
+        </select>
+
+        <input type=submit value=Submit>
+      </dl>
+    </form>
+
+</body>
+</html>
